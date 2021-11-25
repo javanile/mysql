@@ -15,6 +15,6 @@ done
 
 if [[ $@ != *'--no-push'* ]]; then
     git add .
-    git commit -am "new release"
+    git commit -am "new release" && true
     git push
 fi
