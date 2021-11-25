@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  mysql:
+    build: ./5.7.28
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - ./tests/fixtures/:/dataset
