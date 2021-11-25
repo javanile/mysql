@@ -4,6 +4,7 @@ services:
   mysql:
     build: ./5.7.28
     environment:
+      - MYSQL_DATABASE=database
       - MYSQL_ROOT_PASSWORD=secret
     volumes:
       - ./tests/fixtures/:/dataset

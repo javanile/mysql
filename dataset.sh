@@ -15,19 +15,27 @@ dataset_file () {
     return 0
 }
 
+dataset_wait () {
+    echo -n "Waiting for database... "
+    while ! mysqladmin -uroot -h${MYSQL_HOST} -s ping; do sleep 1; done && true
+    return 0
+}
+
 dataset_load () {
     if [ ! -f "$(dataset_file $1)" ]; then
         echo "Error: Dataset '$1' not found."
         exit 1
     fi
-    echo "Load '$1' dataset..."
+    dataset_wait
+    echo -n "--> Load '$1' dataset... "
     mysql -uroot -h${MYSQL_HOST} ${MYSQL_DATABASE} < $(dataset_file $1)
     echo "Done."
     return 0
 }
 
 dataset_save () {
-    echo "Save '$1' dataset..."
+    dataset_wait
+    echo -n "--> Save '$1' dataset... "
     mysqldump -uroot -h${MYSQL_HOST} ${MYSQL_DATABASE} > $(dataset_file $1)
     chmod 777 $(dataset_file $1)
     echo "Done."

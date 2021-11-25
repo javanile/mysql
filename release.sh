@@ -10,9 +10,11 @@ for version in "${versions[@]}"; do
   cp dataset.sh ${version}/dataset.sh
   chmod +x ${version}/dataset.sh
   docker build -t javanile/mysql:${version} ${version}
-  docker push javanile/mysql:${version}
+  [[ $@ != *'--no-push'* ]] && docker push javanile/mysql:${version}
 done
 
-git add .
-git commit -am "new release"
-git push
+if [[ $@ != *'--no-push'* ]]; then
+    git add .
+    git commit -am "new release"
+    git push
+fi
