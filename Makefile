@@ -14,4 +14,7 @@ test-dataset: update
 test-my-cnf: update
 	@docker compose build mysql
 	@docker compose up -d --force-recreate mysql
-	@docker compose exec -T mysql sh -c "cat /etc/mysql/my.cnf"
+	@docker compose exec mysql sh -c "cat /etc/mysql/my.cnf"
+	@docker compose exec mysql execute "SHOW VARIABLES LIKE 'delayed_insert_timeout'"
+
+

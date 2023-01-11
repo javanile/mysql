@@ -1,0 +1,2 @@
+[mysqld]
+delayed_insert_timeout = 500

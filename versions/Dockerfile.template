@@ -1,5 +1,5 @@
 FROM mysql:%{version}
 
-COPY dataset /usr/local/bin/dataset
+COPY dataset execute /usr/local/bin/
 
-RUN mkdir /etc/mysql/mysql.conf.d/ && echo "!includedir /etc/mysql/mysql.conf.d/" >>
+RUN mkdir /etc/mysql/docker.conf.d/ && echo "!includedir /etc/mysql/docker.conf.d/" >> /etc/mysql/my.cnf

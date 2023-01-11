@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+MYSQL_HOST=0.0.0.0
+
+export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
+
+dataset_help () {
+    echo "Usage: ... execute QUERY"
+    exit
+}
+
+dataset_wait () {
+    echo -n "Waiting for database... "
+    while ! mysqladmin -uroot -h${MYSQL_HOST} -s ping; do sleep 1; done && true
+    return 0
+}
+
+dataset_wait
+
+mysql -B -uroot -h${MYSQL_HOST} "${MYSQL_DATABASE}" -e "$1"

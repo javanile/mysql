@@ -17,3 +17,10 @@ This is just an example, and the content can be tailored according to the specif
 
 ## Supported tags
 
+
+
+
+### Config permissions
+
+- Files: 644
+- Directories: 755
