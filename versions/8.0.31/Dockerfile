@@ -1,4 +1,4 @@
-FROM mysql:5.7.28
+FROM mysql:8.0.31
 
 COPY dataset execute inherit-entrypoint.sh /usr/local/bin/
 

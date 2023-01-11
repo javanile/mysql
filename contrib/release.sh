@@ -2,6 +2,7 @@
 
 versions=(
   "5.7.28"
+  "8.0.31"
 )
 
 for version in "${versions[@]}"; do
@@ -17,8 +18,10 @@ for version in "${versions[@]}"; do
   cp versions/inherit-entrypoint.sh "versions/${version}/inherit-entrypoint.sh"
   chmod +x "versions/${version}/inherit-entrypoint.sh"
 
-  docker build -t "javanile/mysql:${version}" "${version}"
-  [[ $@ != *'--no-push'* ]] && docker push "javanile/mysql:${version}"
+  if [[ $@ != *'--no-push'* ]]; then
+    docker build -t "javanile/mysql:${version}" "versions/${version}"
+    docker push "javanile/mysql:${version}"
+  fi
 done
 
 if [[ $@ != *'--no-push'* ]]; then
