@@ -14,6 +14,9 @@ for version in "${versions[@]}"; do
   cp versions/execute "versions/${version}/execute"
   chmod +x "versions/${version}/execute"
 
+  cp versions/inherit-entrypoint.sh "versions/${version}/inherit-entrypoint.sh"
+  chmod +x "versions/${version}/inherit-entrypoint.sh"
+
   docker build -t "javanile/mysql:${version}" "${version}"
   [[ $@ != *'--no-push'* ]] && docker push "javanile/mysql:${version}"
 done

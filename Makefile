@@ -17,4 +17,7 @@ test-my-cnf: update
 	@docker compose exec mysql sh -c "cat /etc/mysql/my.cnf"
 	@docker compose exec mysql execute "SHOW VARIABLES LIKE 'delayed_insert_timeout'"
 
+test-entrypoint: update
+	@docker compose build mysql
+	@docker compose up -d --force-recreate mysql
 
