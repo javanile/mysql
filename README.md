@@ -19,8 +19,23 @@ Thank you for choosing our MySQL image!
 This is just an example, and the content can be tailored according to the specifics of the project. 
 The goal is just to give an overview of what's the purpose of the project, and what are the advantages of using it.
 
-## Supported tags
+## Supported tags and respective `Dockerfile` links
 
+* [`8.0.31`, `8.0`, `8`, `latest`](https://github.com/javanile/mysql/blob/main/versions/8.0.31/Dockerfile)
+* [`5.7.28`, `5.7`, `5`](https://github.com/javanile/mysql/blob/main/version/5.7.28/Dockerfile)
 
+## How to use this image
 
+```yaml
+version: "3"
 
+services:
+  mysql:
+    image: javanile/mysql:8.0.31
+    environment:
+      - MYSQL_DATABASE=database
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - ./etc/docker.d:/etc/docker.d
+      - ./etc/mysql:/etc/mysql/docker.conf.d
+```
