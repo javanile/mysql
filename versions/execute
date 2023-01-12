@@ -6,7 +6,7 @@ MYSQL_HOST=0.0.0.0
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
 execute_help () {
-    echo "Usage: ... execute QUERY"
+    echo "Usage: docker compose exec CONTAINER_NAME execute QUERY"
     exit
 }
 
