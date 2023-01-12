@@ -5,17 +5,24 @@ MYSQL_HOST=0.0.0.0
 
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
-dataset_help () {
-    echo "Usage: ... execute QUERY"
+execute_help () {
+    echo "Usage: docker compose exec CONTAINER_NAME execute QUERY"
     exit
 }
 
-dataset_wait () {
-    echo -n "Waiting for database... "
-    while ! mysqladmin -uroot -h${MYSQL_HOST} -s ping; do sleep 1; done && true
+execute_wait () {
+    echo -n "Service status: " >&2
+    while ! mysqladmin -uroot -h${MYSQL_HOST} -s ping >&2; do sleep 1; done && true
     return 0
 }
 
-dataset_wait
+[ -z "$1" ] && execute_help
+
+if [ "$(xargs --null < /proc/1/cmdline | cut -d' ' -f3)" = execute ]; then
+    echo "Error: Must use 'docker compose exec' instead of 'docker compose run'."
+    exit 1
+fi
+
+execute_wait
 
 mysql -B -uroot -h${MYSQL_HOST} "${MYSQL_DATABASE}" -e "$1"
