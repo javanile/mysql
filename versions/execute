@@ -18,6 +18,11 @@ execute_wait () {
 
 [ -z "$1" ] && execute_help
 
+if [ "$(xargs --null < /proc/1/cmdline | cut -d' ' -f3)" = execute ]; then
+    echo "Error: Cannot use 'docker compose run', use 'docker compose exec' instead."
+    exit 1
+fi
+
 execute_wait
 
 mysql -B -uroot -h${MYSQL_HOST} "${MYSQL_DATABASE}" -e "$1"
