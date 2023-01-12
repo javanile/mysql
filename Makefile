@@ -1,4 +1,8 @@
 
+## ====
+## Dist
+## ====
+
 update:
 	@bash contrib/release.sh --no-push
 	@docker compose build mysql
