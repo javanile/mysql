@@ -13,4 +13,4 @@ docker_hook init
 chmod 755 /etc/mysql/docker.conf.d
 chmod 644 /etc/mysql/docker.conf.d/*.cnf
 
-docker-entrypoint.sh "$@"
+inherited-entrypoint.sh "$@"

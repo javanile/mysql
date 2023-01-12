@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+release=0.$(date +%y.%W)
+
 versions=(
   "5.7.28"
   "8.0.31"
@@ -15,8 +17,8 @@ for version in "${versions[@]}"; do
   cp versions/execute "versions/${version}/execute"
   chmod +x "versions/${version}/execute"
 
-  cp versions/inherit-entrypoint.sh "versions/${version}/inherit-entrypoint.sh"
-  chmod +x "versions/${version}/inherit-entrypoint.sh"
+  cp versions/docker-entrypoint.sh "versions/${version}/docker-entrypoint.sh"
+  chmod +x "versions/${version}/docker-entrypoint.sh"
 
   if [[ $@ != *'--no-push'* ]]; then
     docker build -t "javanile/mysql:${version}" "versions/${version}"
@@ -26,6 +28,6 @@ done
 
 if [[ $@ != *'--no-push'* ]]; then
     git add .
-    git commit -am "new release" && true
+    git commit -am "Release ${release}" && true
     git push
 fi
