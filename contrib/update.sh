@@ -12,6 +12,7 @@ if [[ $@ = *'--release'* ]]; then
     git add .
     git commit -am "Release ${release}" && true
     git push
+    echo "Docker login"
     docker login -u javanile
 fi
 
