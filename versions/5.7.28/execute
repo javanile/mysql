@@ -6,7 +6,7 @@ MYSQL_HOST=0.0.0.0
 export MYSQL_PWD=${MYSQL_ROOT_PASSWORD}
 
 execute_help () {
-    echo "Usage: ... execute QUERY"
+    echo "Usage: docker compose exec CONTAINER_NAME execute QUERY"
     exit
 }
 
@@ -19,7 +19,7 @@ execute_wait () {
 [ -z "$1" ] && execute_help
 
 if [ "$(xargs --null < /proc/1/cmdline | cut -d' ' -f3)" = execute ]; then
-    echo "Error: Cannot use 'docker compose run' use 'docker compose exec' instead."
+    echo "Error: Must use 'docker compose exec' instead of 'docker compose run'."
     exit 1
 fi
 

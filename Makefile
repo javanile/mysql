@@ -4,11 +4,11 @@
 ## ====
 
 update:
-	@bash contrib/release.sh --no-push
+	@bash contrib/update.sh
 	@docker compose build mysql
 
 release:
-	@bash release.sh
+	@bash contrib/update.sh --release
 
 ## ====
 ## Test

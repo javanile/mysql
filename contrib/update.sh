@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-release=0.$(date +%y.%W)
-
 versions=(
   "5.7.28"
   "8.0.31"
 )
+
+release=0.$(date +%y.%W)
 
 for version in "${versions[@]}"; do
   mkdir -p "versions/${version}"
@@ -20,13 +20,13 @@ for version in "${versions[@]}"; do
   cp versions/docker-entrypoint.sh "versions/${version}/docker-entrypoint.sh"
   chmod +x "versions/${version}/docker-entrypoint.sh"
 
-  if [[ $@ != *'--no-push'* ]]; then
+  if [[ $@ = *'--release'* ]]; then
     docker build -t "javanile/mysql:${version}" "versions/${version}"
     docker push "javanile/mysql:${version}"
   fi
 done
 
-if [[ $@ != *'--no-push'* ]]; then
+if [[ $@ = *'--release'* ]]; then
     git add .
     git commit -am "Release ${release}" && true
     git push
