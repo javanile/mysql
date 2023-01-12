@@ -8,6 +8,7 @@ versions=(
 release=0.$(date +%y.%W)
 
 for version in "${versions[@]}"; do
+  echo "====[ $version ]===="
   mkdir -p "versions/${version}"
   sed -e 's!%{version}!'"${version}"'!' versions/Dockerfile.template > "versions/${version}/Dockerfile"
 
