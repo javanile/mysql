@@ -1,4 +1,4 @@
-FROM mysql:8.0.31
+FROM mysql:5.7.28
 
 LABEL author="bianco@javanile.org"
 LABEL release="0.23.02.04"
