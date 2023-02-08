@@ -10,6 +10,7 @@ docker_hook() {
 
 docker_hook init
 
+mkdir -p /etc/mysql/docker.conf.d >/dev/null 2>&1
 chmod 755 /etc/mysql/docker.conf.d
 chmod 644 /etc/mysql/docker.conf.d/*.cnf
 
