@@ -26,6 +26,8 @@ The goal is just to give an overview of what's the purpose of the project, and w
 
 ## How to use this image
 
+This is the minimal footprint for a MySQL database server 
+
 ```yaml
 version: "3"
 
@@ -35,7 +37,37 @@ services:
     environment:
       - MYSQL_DATABASE=database
       - MYSQL_ROOT_PASSWORD=secret
-    volumes:
-      - ./etc/docker.d:/etc/docker.d
+```
+
+## Using a custom MySQL configuration files
+
+The additional configuration for MySQL can be placed in `/etc/mysql/docker.conf.d` directory. 
+Avoid to bind single file, use a local directory to host your custom files and mount as volume.
+
+```yaml
+version: "3"
+
+services:
+  mysql:
+    image: javanile/mysql:8.0.31
+    environment:
+      - MYSQL_DATABASE=database
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:      
       - ./etc/mysql:/etc/mysql/docker.conf.d
+```
+
+## Using dataset
+
+```yaml
+version: "3"
+
+services:
+  mysql:
+    image: javanile/mysql:8.0.31
+    environment:
+      - MYSQL_DATABASE=database
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:      
+      - ./var/mysql-dataset:/var/lib/mysql-dataset
 ```
