@@ -14,6 +14,10 @@ release:
 ## Test
 ## ====
 
+test-up: update
+	@docker compose down -v
+	@docker compose up mysql
+
 test-dataset: update
 	@docker compose down -v
 	@docker compose up -d mysql

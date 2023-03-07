@@ -2,6 +2,7 @@ version: "3"
 
 services:
   mysql:
+    platform: linux/amd64
     build: versions/5.7.28
     #build: versions/8.0.31
     environment:
