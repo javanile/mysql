@@ -18,6 +18,11 @@ test-up: update
 	@docker compose down -v
 	@docker compose up mysql
 
+test-bash: update
+	@docker compose down -v
+	@docker compose up -d mysql
+	@docker compose exec mysql bash
+
 test-dataset: update
 	@docker compose down -v
 	@docker compose up -d mysql
