@@ -2,8 +2,8 @@ version: "3"
 
 services:
   mysql:
-    #build: versions/5.7.28
-    build: versions/8.0.31
+    build: versions/5.7.28
+    #build: versions/8.0.31
     environment:
       - MYSQL_DATABASE=database
       - MYSQL_ROOT_PASSWORD=secret
@@ -12,3 +12,4 @@ services:
       - ./tests/fixtures/dataset:/var/lib/mysql-dataset
       - ./tests/fixtures/docker.conf.d:/etc/mysql/docker.conf.d
       - ./tests/fixtures/docker.d:/etc/docker.d
+    restart: "no"

@@ -34,3 +34,8 @@ test-execute: update
 	@docker compose up -d --force-recreate mysql
 	@docker compose exec mysql execute "SHOW DATABASES"
 
+test-kill:
+	@bash tests/kill-test.sh
+
+test-corrupt:
+	@bash tests/corrupt-test.sh
