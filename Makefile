@@ -25,6 +25,11 @@ test-up: update
 	@docker compose down -v
 	@docker compose up mysql
 
+test-bash: update
+	@docker compose down -v
+	@docker compose up -d mysql
+	@docker compose exec mysql bash
+
 test-dataset: update
 	@docker compose down -v
 	@docker compose up -d mysql
@@ -40,6 +45,12 @@ test-my-cnf: update
 test-execute: update
 	@docker compose up -d --force-recreate mysql
 	@docker compose exec mysql execute "SHOW DATABASES"
+
+test-kill:
+	@bash tests/kill-test.sh
+
+test-corrupt:
+	@bash tests/corrupt-test.sh
 
 test-php: update
 	@docker compose up -d --build
