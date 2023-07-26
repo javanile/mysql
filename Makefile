@@ -10,6 +10,13 @@ update:
 release:
 	@bash contrib/update.sh --release
 
+## ===
+## Dev
+## ===
+
+logs:
+	@docker compose logs -f mysql
+
 ## ====
 ## Test
 ## ====
@@ -34,3 +41,6 @@ test-execute: update
 	@docker compose up -d --force-recreate mysql
 	@docker compose exec mysql execute "SHOW DATABASES"
 
+test-php: update
+	@docker compose up -d --build
+	@docker compose exec php php -f /var/www/html/mysql.php
